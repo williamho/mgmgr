@@ -9,11 +9,18 @@ angular.module('mgmgr').factory('visitsFactory', ['$firebase', 'firebaseUrl', 'p
     return function(placeId) {
       var visits = visitsForPlace(placeId);
 
+      var updateLastVisit = function() {
+        places.updateLastVisit(placeId, visits.sort()[0].$value);
+      };
+
       return {
         add: function(visit) {
-          visits.$add(visit.date.getTime());
-          places.updateLastVisit(placeId, visit.date.getTime());
+          visits.$add(visit.date.getTime()).then(updateLastVisit)
         },
+        remove: function(visit) {
+          visits.$remove(visit).then(updateLastVisit)
+        },
+        update: updateLastVisit,
         all: visits
       };
     };

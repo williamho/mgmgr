@@ -15,8 +15,9 @@
   </div>
 
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="visit in visits | orderBy:'date':true">
+    <li class="list-group-item" ng-repeat="visit in visits | orderBy:'$value':true">
       {{visit.$value | date:'fullDate'}}
+      (<a href="" ng-click="remove(visit)">Remove</a>)
     </li>
   </ul>
 </div>

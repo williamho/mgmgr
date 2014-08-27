@@ -2,11 +2,10 @@ angular.module('mgmgr').controller('visitsCtrl', ['$scope', '$stateParams', 'pla
   function($scope, $stateParams, places, visitsFactory) {
     $scope.place = places.find($stateParams.placeId);
     var visits = visitsFactory($stateParams.placeId);
-    $scope.newDate = {
-      date: new Date()
-    }
 
     $scope.add = visits.add;
+    $scope.remove = visits.remove;
+    $scope.update = visits.update;
 
     $scope.visits = visits.all;
 
