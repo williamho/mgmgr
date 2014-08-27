@@ -14,16 +14,14 @@
   </div>
 
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="place in places | orderBy:lastVisited | startFrom:page*perPage | limitTo:perPage">
-    {{place.name}}
-    {{place.lastVisited}}
+    <li class="list-group-item" ng-repeat="place in places | orderBy:'lastVisited':true">
+      <a ui-sref="visits({placeId: place.$id})">
+        {{place.name}}
+        <span class="pull-right">
+          {{place.lastVisited | date:'fullDate'}}
+        </span>
+      </a>
     </li>
   </ul>
-  <ul class="pager">
-    <li><a ng-click="(page > 0) && (page = page - 1)">Previous</a></li>
-    <li>{{page + 1}} of {{numPages()}}</li>
-    <li><a ng-click="(page < numPages() - 1) && (page = page + 1)">Next</a></li>
-  </ul>
-
 </div>
 

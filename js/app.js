@@ -1,21 +1,19 @@
-var app = angular.module('mgmgr', ['firebase', 'ngRoute']);
+var app = angular.module('mgmgr', ['firebase', 'ui.router', 'ui.bootstrap']);
 
 app.value('firebaseUrl', 'https://mgmgr.firebaseio.com');
 
-app.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider
-      .when('/places', {
-        templateUrl: 'templates/places.html',
-        controller: 'placesCtrl'
+app.config(['$stateProvider',
+  function($stateProvider) {
+    $stateProvider
+      .state('places', {
+        url: '',
+        templateUrl: 'templates/places.html'
       })
-      .when('/visits/:placeId', {
-        templateUrl: 'templates/visitsCtrl.html',
-        controller: 'visitsCtrl'
+      .state('visits', {
+        url: '/places/:placeId',
+        templateUrl: 'templates/visits.html'
       })
-      .otherwise({
-        redirectTo: '/places'
-      })
+      ;
   }
 ]);
 
