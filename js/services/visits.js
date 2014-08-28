@@ -10,7 +10,11 @@ angular.module('mgmgr').factory('visitsFactory', ['$firebase', 'firebaseUrl', 'p
       var visits = visitsForPlace(placeId);
 
       var updateLastVisit = function() {
-        places.updateLastVisit(placeId, visits.sort()[0].$value);
+        var lastVisit = visits
+          .map(function(v) { return v.$value; })
+          .sort()
+          .reverse()[0];
+        places.updateLastVisit(placeId, lastVisit);
       };
 
       return {
