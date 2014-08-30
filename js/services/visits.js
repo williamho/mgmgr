@@ -1,7 +1,7 @@
 angular.module('mgmgr').factory('visitsFactory', ['$firebase', 'firebaseUrl', 'placesService',
   function($firebase, firebaseUrl, places) {
     function visitsForPlace(id) {
-      var sync = $firebase(new Firebase(firebaseUrl + '/visits/' + id))
+      var sync = $firebase(new Firebase(firebaseUrl + '/places/' + id + '/visits'));
       var visits = sync.$asArray();
       return visits;
     }
